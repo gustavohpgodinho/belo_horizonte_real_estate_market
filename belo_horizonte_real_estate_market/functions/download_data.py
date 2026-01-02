@@ -24,7 +24,7 @@ def list_files(dataset_id):
     else:
         raise Exception(f"API ERROR: {response.status_code} - {response.text}")
 
-def get_csv_file(url, dataset = None, verbose = 1):
+def get_csv_file(url, dataset = None, separate = ";", verbose = 1):
     if url == "":
         return None
 
@@ -44,12 +44,12 @@ def get_csv_file(url, dataset = None, verbose = 1):
         # read the csv file using pandas
         df = pd.DataFrame()
         try:
-            df = pd.read_csv(csv_data, sep = ';', encoding = 'utf-8')
+            df = pd.read_csv(csv_data, sep = separate, encoding = 'utf-8')
             if verbose: print(f"{url}: successful downloaded data!")
         except Exception as e:
             # Try another encoding if the first fail
             csv_data.seek(0)
-            df = pd.read_csv(csv_data, sep = ';', encoding = 'latin-1')
+            df = pd.read_csv(csv_data, sep = separate, encoding = 'latin-1')
             if verbose: print(f"{url}: successful downloaded data (latin-1)!")
     else:
         print(f"ERROR TO DOWNLOAD {url}: {response.status_code}")
