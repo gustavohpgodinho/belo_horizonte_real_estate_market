@@ -1,0 +1,9 @@
+[project]
+name = "belo_horizonte_real_estate_market"
+version = "0.1.0"
+description = "Projeto de analise imobiliaria de BH"
+requires-python = ">=3.8"
+dependencies = ["pandas", "curl_cffi"]
+
+[tool.setuptools.packages]
+find = { }
